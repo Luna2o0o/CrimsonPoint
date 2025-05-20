@@ -30,7 +30,7 @@ resource "aws_instance" "oasis_vm" {
 }
 
 resource "aws_s3_bucket" "log_bucket" {
-  bucket = "outlaw-logs-luna"
+  bucket = "oasis-logs-luna"
   force_destroy = true
   tags = {
     Environment = "Dev"
