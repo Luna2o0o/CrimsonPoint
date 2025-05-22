@@ -19,3 +19,11 @@ aws ec2 run-instances \
 
 aws s3 mb s3://outlaw-logs-luna
 aws s3 cp logs/outlaw_log1.txt s3://outlaw-logs-luna/
+
+aws s3 mb s3://outlaw-sensor-logs
+aws s3 cp logs/ride_sensor_log.json s3://outlaw-sensor-logs/
+
+aws sns create-topic --name ride-alerts
+aws sns subscribe --topic-arn arn:aws:sns:us-east-1:<your-account-id>:ride-alerts \
+  --protocol email \
+  --notification-endpoint litzi.lunacolorado@peopelshores.com
