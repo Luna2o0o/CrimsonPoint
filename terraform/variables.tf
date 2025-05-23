@@ -5,5 +5,5 @@ variable "region" {
 
 variable "s3_bucket_name" {
   description = "Name of the S3 bucket to store sensor logs"
-  default     = "outlaw-sensor-logs"
+  default     = "crimson-sensor-logs"
 }
