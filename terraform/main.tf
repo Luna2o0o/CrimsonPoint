@@ -27,7 +27,7 @@ resource "aws_s3_bucket" "sensor_logs" {
   bucket = var.s3_bucket_name
   force_destroy = true
   tags = {
-    Project = "Crimsion Point"
+    Project = "Crimson Point"
   }
 }
 
@@ -114,8 +114,8 @@ resource "aws_lambda_permission" "allow_s3" {
 # --------------------------
 # CloudWatch Dashboard
 # --------------------------
-resource "aws_cloudwatch_dashboard" "crimsion_dashboard" {
-  dashboard_name = "CrimsionDashboard"
+resource "aws_cloudwatch_dashboard" "crimson_dashboard" {
+  dashboard_name = "CrimsonDashboard"
 
   dashboard_body = jsonencode({
     widgets = [
