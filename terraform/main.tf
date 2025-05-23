@@ -20,20 +20,20 @@ data "aws_ami" "amazon_linux" {
 resource "aws_instance" "oasis_vm" {
   ami           = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
-  key_name      = "OasisKey"
+  key_name      = "crimsionkey"
 
   user_data = file("${path.module}/../scripts/setup.sh")
 
   tags = {
-    Name = "oasis-tf-vm"
+    Name = "crimsion-tf-vm"
   }
 }
 
 resource "aws_s3_bucket" "log_bucket" {
-  bucket = "oasis-logs-luna"
+  bucket = "crimsion-logs-luna"
   force_destroy = true
   tags = {
     Environment = "Dev"
-    Project     = "Outlaw Oasis"
+    Project     = "crimsion"
   }
 }
