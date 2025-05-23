@@ -9,9 +9,9 @@ unzip terraform_1.5.7_linux_amd64.zip
 sudo mv terraform /usr/local/bin/
 terraform -version
 
-echo "Cloning OutlawOasis repo..."
+echo "Cloning Crimson Point repo..."
 git clone https://github.com/Luna2o0o/CrimsionPoint.git
-cd OutlawOasis
+cd CrimsonPoint
 
 echo "Zipping Lambda function..."
 bash scripts/zip_lambda.sh
