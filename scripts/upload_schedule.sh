@@ -1,5 +1,5 @@
 #!/bin/bash
 aws dynamodb put-item \
-  --table-name crimsion-schedule \
+  --table-name outlaw-schedule \
   --item file://../data/schedule.json \
   --return-consumed-capacity TOTAL
