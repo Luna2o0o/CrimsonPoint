@@ -11,7 +11,7 @@ AMI_ID=$(aws ec2 describe-images \
 aws ec2 run-instances \
     --image-id $AMI_ID \
     --instance-type t2.micro \
-    --key-name CrimsionKey \
+    --key-name crimsionKey \
     --security-groups default \
     --user-data file://scripts/setup.sh \
     --region $REGION \
@@ -21,7 +21,7 @@ aws s3 mb s3://crimsion-logs-luna
 aws s3 cp logs/crimsion_log1.txt s3://crimsion-logs-luna/
 
 aws s3 mb s3://crimsion-sensor-logs
-aws s3 cp logs/ride_sensor_log.json s3://crimision-sensor-logs/
+aws s3 cp logs/ride_sensor_log.json s3://crimsion-sensor-logs/
 
 aws sns create-topic --name ride-alerts
 aws sns subscribe --topic-arn arn:aws:sns:us-east-1:<your-account-id>:ride-alerts \
