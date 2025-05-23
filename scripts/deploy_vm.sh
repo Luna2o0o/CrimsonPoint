@@ -11,7 +11,7 @@ AMI_ID=$(aws ec2 describe-images \
 aws ec2 run-instances \
     --image-id $AMI_ID \
     --instance-type t2.micro \
-    --key-name crimsionKey \
+    --key-name crimsionkey \
     --security-groups default \
     --user-data file://scripts/setup.sh \
     --region $REGION \
