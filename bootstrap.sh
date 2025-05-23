@@ -10,7 +10,7 @@ sudo mv terraform /usr/local/bin/
 terraform -version
 
 echo "Cloning Crimson Point repo..."
-git clone https://github.com/Luna2o0o/CrimsionPoint.git
+git clone https://github.com/Luna2o0o/CrimsonPoint.git
 cd CrimsonPoint
 
 echo "Zipping Lambda function..."
