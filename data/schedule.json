@@ -1,6 +1,0 @@
-{
-  "task_id": {"S": "SHOW123"},
-  "type": {"S": "performance"},
-  "location": {"S": "Main Stage"},
-  "time": {"S": "2025-05-20T18:00:00Z"}
-}
