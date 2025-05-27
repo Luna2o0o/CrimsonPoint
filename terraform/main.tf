@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
 }
 
 # Fetch latest Amazon Linux 2 AMI
@@ -21,15 +21,16 @@ data "aws_vpc" "default" {
 # Create EC2 instance for the "prairie VM"
 resource "aws_instance" "crimson_vm" {
   ami                         = data.aws_ami.amazon_linux.id
-  instance_type               = "t2.micro"
-  key_name                    = "CrimsonKey"  # Make sure this key pair exists in AWS!
+  instance_type               = var.instance_type
+  key_name                    = var.key_pair_name
   vpc_security_group_ids      = [aws_security_group.crimson_sg.id]
   associate_public_ip_address = true
 
   user_data = file("${path.module}/../scripts/setup.sh")
 
   tags = {
-    Name = "crimson-vm"
+    Name        = "crimson-vm"
+    Environment = var.environment
   }
 
   depends_on = [aws_security_group.crimson_sg]
@@ -37,11 +38,11 @@ resource "aws_instance" "crimson_vm" {
 
 # Create S3 bucket for downtime logs
 resource "aws_s3_bucket" "crimson_logs" {
-  bucket = "crimson-point-logs"
+  bucket = var.log_bucket_name
 
   tags = {
     Name        = "Crimson Point Log Storage"
-    Environment = "Production"
+    Environment = var.environment
   }
 }
 
