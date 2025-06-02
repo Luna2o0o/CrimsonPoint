@@ -6,11 +6,11 @@ resource "aws_glue_catalog_database" "crimson_logs" {
 }
 
 resource "aws_glue_crawler" "crimson_log_crawler" {
-  name         = "crimson-log-crawler2025"
+  name         = "crimson-log-crawler"
   role         = aws_iam_role.glue_crawler_role.arn
   database_name = aws_glue_catalog_database.crimson_logs.name
   s3_target {
-    path = "s3://crimson-point-logs/"
+    path = "s3://crimson-point-logs2025/"
   }
   schedule = "cron(0 * * * ? *)" # every hour (optional)
   schema_change_policy {
