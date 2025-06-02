@@ -23,7 +23,7 @@ variable "key_pair_name" {
 variable "log_bucket_name" {
   description = "Name of the S3 bucket used for performance logs"
   type        = string
-  default     = "crimson-point-logs2025"
+  default     = "crimson-point-logs"
 }
 
 # Tags
