@@ -6,7 +6,7 @@ resource "aws_glue_catalog_database" "crimson_logs" {
 }
 
 resource "aws_glue_crawler" "crimson_log_crawler" {
-  name         = "crimson-log-crawler"
+  name         = "crimson-log-crawler2025"
   role         = aws_iam_role.glue_crawler_role.arn
   database_name = aws_glue_catalog_database.crimson_logs.name
   s3_target {
