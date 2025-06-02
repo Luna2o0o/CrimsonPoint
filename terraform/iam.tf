@@ -26,8 +26,8 @@ resource "aws_iam_policy" "lambda_s3_policy" {
           "s3:ListBucket"
         ],
         Resource = [
-          "arn:aws:s3:::crimson-point-logs",
-          "arn:aws:s3:::crimson-point-logs/*"
+          "arn:aws:s3:::crimson-point-logs2025",
+          "arn:aws:s3:::crimson-point-logs2025/*"
         ]
       },
       {
