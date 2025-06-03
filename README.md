@@ -1,2 +1,2 @@
-# OutlawOasis
+# Crimson Point
 Capstone Project
