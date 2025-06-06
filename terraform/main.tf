@@ -25,27 +25,6 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-# Security Group
-resource "aws_security_group" "crimson_sg" {
-  name        = "crimson-sg"
-  description = "Allow SSH"
-  vpc_id      = data.aws_vpc.default.id
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Replace with your IP in production
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 # Launch Template
 resource "aws_launch_template" "crimson_template" {
   name_prefix   = "crimson-launch-"
