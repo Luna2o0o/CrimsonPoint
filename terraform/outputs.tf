@@ -12,3 +12,8 @@ output "s3_log_bucket" {
   description = "The name of the S3 bucket for logs"
   value       = aws_s3_bucket.crimson_logs.bucket
 }
+
+output "cloudwatch_dashboard_name" {
+  description = "The name of the CloudWatch Dashboard"
+  value       = aws_cloudwatch_dashboard.crimson_dashboard.dashboard_name
+}
