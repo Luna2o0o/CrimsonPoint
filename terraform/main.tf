@@ -103,7 +103,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "crimson_encryptio
 
 # CloudWatch Dashboard
 resource "aws_cloudwatch_dashboard" "crimson_dashboard" {
-  dashboard_name = "CrimsonOasisDashboard"
+  dashboard_name = "CrimsonPointDashboard"
 
   dashboard_body = jsonencode({
     widgets = [
