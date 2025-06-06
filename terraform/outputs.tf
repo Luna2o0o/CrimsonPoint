@@ -17,3 +17,8 @@ output "cloudwatch_dashboard_name" {
   description = "The name of the CloudWatch Dashboard"
   value       = aws_cloudwatch_dashboard.crimson_dashboard.dashboard_name
 }
+
+output "s3_lifecycle_rule_id" {
+  description = "The ID of the lifecycle rule for storage efficiency"
+  value       = "log-storage-optimization"
+}
