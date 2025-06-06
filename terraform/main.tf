@@ -80,9 +80,28 @@ resource "aws_autoscaling_policy" "cpu_tracking" {
   }
 }
 
-# S3 Bucket for Logs
+# S3 Bucket for Logs with Lifecycle Rule
 resource "aws_s3_bucket" "crimson_logs" {
   bucket = var.log_bucket_name
+
+  lifecycle_rule {
+    id      = "log-storage-optimization"
+    enabled = true
+
+    transition {
+      days          = 30
+      storage_class = "GLACIER"
+    }
+
+    noncurrent_version_transition {
+      days          = 30
+      storage_class = "GLACIER"
+    }
+
+    expiration {
+      expired_object_delete_marker = false
+    }
+  }
 
   tags = {
     Name        = "Crimson Point Logs"
@@ -103,7 +122,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "crimson_encryptio
 
 # CloudWatch Dashboard
 resource "aws_cloudwatch_dashboard" "crimson_dashboard" {
-  dashboard_name = "CrimsonPointDashboard"
+  dashboard_name = "CrimsonOasisDashboard"
 
   dashboard_body = jsonencode({
     widgets = [
