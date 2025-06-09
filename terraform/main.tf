@@ -142,13 +142,72 @@ resource "aws_cloudwatch_dashboard" "crimson_dashboard" {
         width = 12,
         height = 6,
         properties = {
+          title = "Auto Scaling Group Metrics",
           metrics = [
-            [ "AWS/EC2", "CPUUtilization", "AutoScalingGroupName", aws_autoscaling_group.crimson_asg.name ]
+            ["AWS/AutoScaling", "GroupInServiceInstances", "AutoScalingGroupName", aws_autoscaling_group.crimson_asg.name],
+            [".", "GroupDesiredCapacity", ".", "."],
+            [".", "GroupTotalInstances", ".", "."]
           ],
           view = "timeSeries",
           stacked = false,
           region = var.aws_region,
-          title = "CPU Utilization - Crimson ASG"
+          stat = "Average",
+          period = 300
+        }
+      },
+      {
+        type = "metric",
+        x = 0,
+        y = 6,
+        width = 12,
+        height = 6,
+        properties = {
+          title = "EC2 CPU Utilization by ASG",
+          metrics = [
+            ["AWS/EC2", "CPUUtilization", "AutoScalingGroupName", aws_autoscaling_group.crimson_asg.name]
+          ],
+          view = "timeSeries",
+          stacked = false,
+          region = var.aws_region,
+          stat = "Average",
+          period = 300
+        }
+      },
+      {
+        type = "metric",
+        x = 0,
+        y = 12,
+        width = 12,
+        height = 6,
+        properties = {
+          title = "Lambda Invocations",
+          metrics = [
+            ["AWS/Lambda", "Invocations", "FunctionName", "parse_logs"],
+            [".", "Invocations", "FunctionName", "check_maintenance"]
+          ],
+          view = "timeSeries",
+          stacked = false,
+          region = var.aws_region,
+          period = 300
+        }
+      },
+      {
+        type = "metric",
+        x = 0,
+        y = 18,
+        width = 12,
+        height = 6,
+        properties = {
+          title = "Lambda Error Rates",
+          metrics = [
+            ["AWS/Lambda", "Errors", "FunctionName", "parse_logs"],
+            [".", "Errors", "FunctionName", "check_maintenance"]
+          ],
+          view = "timeSeries",
+          stacked = false,
+          region = var.aws_region,
+          stat = "Sum",
+          period = 300
         }
       }
     ]
