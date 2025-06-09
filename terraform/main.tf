@@ -25,7 +25,7 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-# Launch Template
+# Launch Template for EC2
 resource "aws_launch_template" "crimson_template" {
   name_prefix   = "crimson-launch-"
   image_id      = data.aws_ami.amazon_linux.id
@@ -80,13 +80,27 @@ resource "aws_autoscaling_policy" "cpu_tracking" {
   }
 }
 
-# S3 Bucket for Logs with Lifecycle Rule
+# S3 Bucket for Logs
 resource "aws_s3_bucket" "crimson_logs" {
   bucket = var.log_bucket_name
 
-  lifecycle_rule {
-    id      = "log-storage-optimization"
-    enabled = true
+  tags = {
+    Name        = "Crimson Point Logs"
+    Environment = var.environment
+  }
+}
+
+# Lifecycle Configuration (moved out of deprecated block)
+resource "aws_s3_bucket_lifecycle_configuration" "crimson_lifecycle" {
+  bucket = aws_s3_bucket.crimson_logs.id
+
+  rule {
+    id     = "log-storage-optimization"
+    status = "Enabled"
+
+    filter {
+      prefix = ""
+    }
 
     transition {
       days          = 30
@@ -101,11 +115,6 @@ resource "aws_s3_bucket" "crimson_logs" {
     expiration {
       expired_object_delete_marker = false
     }
-  }
-
-  tags = {
-    Name        = "Crimson Point Logs"
-    Environment = var.environment
   }
 }
 
