@@ -90,7 +90,7 @@ resource "aws_s3_bucket" "crimson_logs" {
   }
 }
 
-# Lifecycle Configuration (moved out of deprecated block)
+# Lifecycle Configuration (corrected syntax)
 resource "aws_s3_bucket_lifecycle_configuration" "crimson_lifecycle" {
   bucket = aws_s3_bucket.crimson_logs.id
 
@@ -108,8 +108,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "crimson_lifecycle" {
     }
 
     noncurrent_version_transition {
-      days          = 30
-      storage_class = "GLACIER"
+      noncurrent_days = 30
+      storage_class   = "GLACIER"
     }
 
     expiration {
