@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "📦 Zipping Lambda functions..."
+echo "Zipping Lambda functions..."
 
 # Navigate to the lambda directory
 cd $(dirname "$0")/../lambda
