@@ -6,11 +6,6 @@ echo "🔧 Starting setup for Crimson VM..."
 echo "Updating packages..."
 sudo yum update -y
 
-# Install Python 3 and pip
-echo "🐍 Installing Python 3 and pip..."
-sudo yum install -y python3
-sudo pip3 install --upgrade pip
-
 # Install stress tool for CPU load testing
 echo "🔥 Installing stress tool..."
 sudo yum install -y stress
