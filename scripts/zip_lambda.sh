@@ -12,6 +12,14 @@ else
   echo "❌ parse_logs.py not found!"
 fi
 
+# Zip sensor_alert.py
+if [ -f "sensor_alert.py" ]; then
+  zip -o sensor_alert.zip sensor_alert.py
+  echo "✅ sensor_alert.zip created!"
+else
+  echo "❌ sensor_alert.py not found!"
+fi
+
 # Zip check_maintenance.py
 if [ -f "check_maintenance.py" ]; then
   zip -o check_maintenance.zip check_maintenance.py
