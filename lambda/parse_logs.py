@@ -5,11 +5,22 @@ import os
 def lambda_handler(event, context):
     s3 = boto3.client('s3')
 
-    # Get bucket and object key from the event
-    bucket = event['Records'][0]['s3']['bucket']['name']
-    key    = event['Records'][0]['s3']['object']['key']
-
     try:
+        records = event.get("Records", [])
+        if not records:
+            raise ValueError("No Records found in the event.")
+
+        bucket = records[0]['s3']['bucket']['name']
+        key    = records[0]['s3']['object']['key']
+
+        # Filter out unwanted files (optional)
+        if not key.endswith(".csv"):
+            print(f"Skipping unsupported file type: {key}")
+            return {
+                'statusCode': 200,
+                'body': json.dumps(f'Skipped unsupported file type: {key}')
+            }
+
         # Get object from S3
         response = s3.get_object(Bucket=bucket, Key=key)
         content = response['Body'].read().decode('utf-8')
@@ -25,5 +36,5 @@ def lambda_handler(event, context):
         }
 
     except Exception as e:
-        print(e)
+        print(f"❌ Error: {e}")
         raise e
