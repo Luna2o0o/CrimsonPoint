@@ -42,6 +42,15 @@ resource "aws_launch_template" "crimson_template" {
       Environment = var.environment
     }
   }
+}/../scripts/setup.sh"))
+
+  tag_specifications {
+    resource_type = "instance"
+    tags = {
+      Name        = "crimson-vm"
+      Environment = var.environment
+    }
+  }
 }
 
 # Auto Scaling Group
