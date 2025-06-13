@@ -137,19 +137,15 @@ resource "aws_cloudwatch_dashboard" "crimson_dashboard" {
     widgets = [
       {
         "type": "metric",
-        "x": 0,
-        "y": 0,
-        "width": 12,
-        "height": 6,
+        "x": 0, "y": 0, "width": 12, "height": 6,
         "properties": {
-          "title": "Auto Scaling Group Metrics",
+          "title": "Auto Scaling Group Capacity",
           "metrics": [
-            ["AWS/AutoScaling", "GroupInServiceInstances", "AutoScalingGroupName", aws_autoscaling_group.crimson_asg.name],
-            [".", "GroupDesiredCapacity", ".", "."],
+            ["AWS/AutoScaling", "GroupDesiredCapacity", "AutoScalingGroupName", aws_autoscaling_group.crimson_asg.name],
+            [".", "GroupInServiceInstances", ".", "."],
             [".", "GroupTotalInstances", ".", "."]
           ],
           "view": "timeSeries",
-          "stacked": false,
           "region": var.aws_region,
           "stat": "Average",
           "period": 300
@@ -157,17 +153,13 @@ resource "aws_cloudwatch_dashboard" "crimson_dashboard" {
       },
       {
         "type": "metric",
-        "x": 0,
-        "y": 6,
-        "width": 12,
-        "height": 6,
+        "x": 0, "y": 6, "width": 12, "height": 6,
         "properties": {
-          "title": "EC2 CPU Utilization by ASG",
+          "title": "EC2 CPU Utilization (Auto Scaling)",
           "metrics": [
             ["AWS/EC2", "CPUUtilization", "AutoScalingGroupName", aws_autoscaling_group.crimson_asg.name]
           ],
           "view": "timeSeries",
-          "stacked": false,
           "region": var.aws_region,
           "stat": "Average",
           "period": 300
@@ -175,36 +167,31 @@ resource "aws_cloudwatch_dashboard" "crimson_dashboard" {
       },
       {
         "type": "metric",
-        "x": 0,
-        "y": 12,
-        "width": 12,
-        "height": 6,
+        "x": 0, "y": 12, "width": 12, "height": 6,
         "properties": {
           "title": "Lambda Invocations",
           "metrics": [
             ["AWS/Lambda", "Invocations", "FunctionName", "parse_logs"],
-            [".", "Invocations", "FunctionName", "check_maintenance"]
+            [".", "Invocations", "FunctionName", "check_maintenance"],
+            [".", "Invocations", "FunctionName", "sensor_alert"]
           ],
           "view": "timeSeries",
-          "stacked": false,
           "region": var.aws_region,
+          "stat": "Sum",
           "period": 300
         }
       },
       {
         "type": "metric",
-        "x": 0,
-        "y": 18,
-        "width": 12,
-        "height": 6,
+        "x": 0, "y": 18, "width": 12, "height": 6,
         "properties": {
           "title": "Lambda Error Rates",
           "metrics": [
             ["AWS/Lambda", "Errors", "FunctionName", "parse_logs"],
-            [".", "Errors", "FunctionName", "check_maintenance"]
+            [".", "Errors", "FunctionName", "check_maintenance"],
+            [".", "Errors", "FunctionName", "sensor_alert"]
           ],
           "view": "timeSeries",
-          "stacked": false,
           "region": var.aws_region,
           "stat": "Sum",
           "period": 300
