@@ -17,14 +17,32 @@ echo "System initialized on $(date)" > /home/ec2-user/logs/init.log
 chmod +x /home/ec2-user/logs/init.log
 
 # Install Terraform
-echo "🚀 Installing Terraform..."
-sudo yum install -y yum-utils unzip curl
+set -e  # Stop the script if any command fails 
+echo "🧭 Starting Terraform installation..."
+ 
+# Change to home directory
+cd ~ 
+
+# Download Terraform binary (version 1.7.5 — update if needed)
+echo "📥 Downloading Terraform..."
 curl -O https://releases.hashicorp.com/terraform/1.7.5/terraform_1.7.5_linux_amd64.zip
+ 
+# Install unzip if missing
+if ! command -v unzip &> /dev/null; then
+  echo "🛠 Installing unzip..."
+  sudo yum install -y unzip
+fi
+ 
+# Unzip the Terraform binary
+echo "📦 Unzipping Terraform..."
 unzip -o terraform_1.7.5_linux_amd64.zip
+ 
+# Move it to a global path
+echo "🚚 Moving Terraform binary to /usr/local/bin..."
 sudo mv terraform /usr/local/bin/
-rm -f terraform_1.7.5_linux_amd64.zip
 
-# Verify Terraform installed
+# Verify the installation
+echo "✅ Checking Terraform version..."
 terraform -version
-
-echo "✅ Setup complete!"
+echo "🎉 Terraform installation complete!"
+ 
