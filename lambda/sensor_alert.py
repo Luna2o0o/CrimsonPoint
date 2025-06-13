@@ -2,8 +2,8 @@ import json
 import boto3
 
 sns = boto3.client('sns')
-TOPIC_ARN = 'arn:aws:sns:us-east-1:<your-account-id>:ride-alerts'
-
+TOPIC_ARN = 'arn:aws:sns:us-east-1:058264110643:ride-alerts'
+#change 05826
 def lambda_handler(event, context):
     print("Triggered by:", event)
 
