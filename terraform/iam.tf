@@ -16,7 +16,7 @@ resource "aws_iam_role" "lambda_s3_role" {
   })
 }
 
-# IAM policy to allow Lambda access to S3 logs and CloudWatch Logs
+# IAM policy to allow Lambda access to S3 logs, CloudWatch Logs, and SNS
 resource "aws_iam_policy" "lambda_s3_policy" {
   name = "lambda-s3-access"
 
@@ -40,6 +40,13 @@ resource "aws_iam_policy" "lambda_s3_policy" {
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
           "logs:PutLogEvents"
+        ],
+        Resource = "*"
+      },
+      {
+        Effect = "Allow",
+        Action = [
+          "sns:Publish"
         ],
         Resource = "*"
       }
@@ -79,3 +86,4 @@ resource "aws_iam_role_policy_attachment" "attach_lambda_dynamodb_policy" {
 
 # This data block is needed for the account_id interpolation
 data "aws_caller_identity" "current" {}
+
