@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🔧 Starting setup for Crimson VM..."
+echo "Starting setup for Crimson VM..."
 
 # Update System
 echo "Updating packages..."
